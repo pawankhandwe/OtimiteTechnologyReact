@@ -25,8 +25,59 @@ const newUser: User = {
   });
  
 
-  const handleSignUp = () => {
-    let signupSuccess = true; 
+//   const handleSignUp = () => {
+
+ 
+    const [errors, setErrors] = useState({
+      emailError: "",
+      passwordError: "",
+    });
+  
+    const handleSignUp = () => {
+      // Reset errors
+      setErrors({
+        emailError: "",
+        passwordError: "",
+      });
+  
+      let signupSuccess = true;
+      
+      // Email validation
+      if (!formData.email.includes("@")) {
+        setErrors((prevState) => ({
+          ...prevState,
+          emailError: "Invalid email address",
+        }));
+        signupSuccess = false;
+      }
+  
+      // Password validation
+      if (formData.password.length < 8) {
+        setErrors((prevState) => ({
+          ...prevState,
+          passwordError: "Password must be at least 8 characters",
+        }));
+        signupSuccess = false;
+      } else if (!/[A-Z]/.test(formData.password)) {
+        setErrors((prevState) => ({
+          ...prevState,
+          passwordError: "Password must contain at least one capital letter",
+        }));
+        signupSuccess = false;
+      } else if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(formData.password)) {
+        setErrors((prevState) => ({
+          ...prevState,
+          passwordError: "Password must contain at least one special character",
+        }));
+        signupSuccess = false;
+      }
+  
+      if (formData.password !== formData.confirmpassword) {
+        navigate("/SignUp");
+        alert("Passwords do not match!");
+        signupSuccess = false;
+      }
+      // let signupSuccess = true; 
     if(formData.password!=formData.confirmpassword)
     {
       navigate("/SignUp");
@@ -58,13 +109,13 @@ signupSuccess=false;
       navigate("/Login");
       
   }
-    } 
+    }
    
   };
 
   return (
     <>
-    <h1>Welcome to SignUp Page</h1>
+    <h1>SignUp Page</h1>
     <form>
     <div>
       <label htmlFor="email">email:</label>
@@ -77,6 +128,8 @@ signupSuccess=false;
           setFormData({ ...formData, email: e.target.value })
         }
       />
+      
+  <span className="error-message">{errors.emailError}</span>
     </div>
     <br />
     <div>
@@ -90,6 +143,8 @@ signupSuccess=false;
           setFormData({ ...formData, password: e.target.value })
         }
       />
+
+<span className="error-message">{errors.passwordError}</span>
     </div>
     <br></br>
     <div>
@@ -102,10 +157,11 @@ signupSuccess=false;
         onChange={(e) =>
           setFormData({ ...formData, confirmpassword: e.target.value })
         }
+        
       />
     </div>
     <br />
-    <button type="button" onClick={handleSignUp}>
+    <button type="button" onClick={handleSignUp} className="signup-button">
       SignUp
     </button>
   </form>

@@ -4,34 +4,26 @@ import '../App.css'
 
 export default function Navbar(){
      const {user}=useAuth()
-   
-    if (user===false) {
-        return(
-          <div>
-          <header>
-            <nav>       
-              <NavLink  to="/Login">Login</NavLink>
-              <NavLink to="/SignUp">SignUp</NavLink>
-            </nav>
-          </header>
-        </div>
-          )
-        
-      }
-      else{
-        return(
-          <div>
-          <header>
-            <nav>
-              <NavLink to="/DashBoard">DashBoard</NavLink>
-              
-              <NavLink to="/Cart">Cart</NavLink>
-              <NavLink to="/logout">logout</NavLink>
-            </nav>
-          </header>
-        </div>
-        )  
-    }
+   return (
+     <div>
+    <header>
+      <nav>
+        {user ? (
+          <>
+            <NavLink to="/Dashboard" className="nav-link">Dashboard</NavLink>
+            <NavLink to="/Cart" className="nav-link">Cart</NavLink>
+            <NavLink to="/logout" className="nav-link">Logout</NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink to="/Login" className="nav-link">Login</NavLink>
+            <NavLink to="/SignUp" className="nav-link">SignUp</NavLink>
+          </>
+        )}
+      </nav>
+    </header>
+  </div>
+);
       
     
   }

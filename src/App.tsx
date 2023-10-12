@@ -6,6 +6,7 @@ import Login from './component/Login';
 import  Cart  from './component/Cart';
 import SignUp from './component/SignUp';
 import Navbar from './component/navbar';
+import ProductDetails from './component/ProductDetails';
 import {AuthProvider} from './component/auth';
 import DashBoard from './component/DashBoard';
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='' element={<SignUp/>}></Route>
         <Route path='/DashBoard' element={<DashBoard/>}></Route>
         <Route path='/Cart' element={<Cart />}></Route>
+        <Route path="/products/:id" element={<ProductDetails />}></Route>
         <Route path='/SignUp' element={<SignUp/>}></Route>
         <Route path='/Login' element={<Login/>}></Route>
         <Route path='/logout' element={<Logout/>}></Route>

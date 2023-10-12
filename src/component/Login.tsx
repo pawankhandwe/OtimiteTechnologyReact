@@ -57,7 +57,7 @@ export default function AuthComponent() {
       {user ? (
         <>
           <h1>Welcome!</h1>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="logout-button">Logout</button>
         </>
       ) : (
         <>
@@ -89,7 +89,7 @@ export default function AuthComponent() {
               />
             </div>
             <br />
-            <button type="button" onClick={handleLogin}>
+            <button type="button" onClick={handleLogin} className="login-button">
               Login
             </button>
           </form>
